@@ -24,18 +24,17 @@ const LIST = 'ListController';
         
         $page = isset($_GET['page']) ? $_GET['page'] : self::INITIAL_PAGE;
 
+        echo '?: '.$page;
+
         switch ($page){
 
             case self::NOVO_CADASTRO:
-                echo 'page='."$page".' [1] <br/>';
-                new listController();
+                new novoController();
                 break;
             case self::LIST:
-                echo 'page='."$page".' [2] <br/>';
-                new novoController().start();
-                break;
+                new listController();
+                break;            
             default:
-                echo 'page='."$page".' [3] <br/>';
                 require 'view/index.php';
                 break;
         }
