@@ -2,12 +2,20 @@
 
 namespace Atividade\Controllers;
 
+use Atividade\Model\Contato;
+use Atividade\Model\GerenciadorContato;
+
+require 'model/Contato.php';
+require 'model/GerenciadorContatos.php';
+
 class listController {
     
-    public $value = 'alo mundo';
-
     public function __construct(){
-        echo 'enter here';
-    }
+        
+        $gc = new GerenciadorContato();
 
+        echo '<pre></pre>';
+
+        $gc->printContatos();
+    }
 }

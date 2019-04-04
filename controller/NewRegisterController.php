@@ -2,24 +2,18 @@
 
 namespace Atividade\Controllers;
 
-class novoController{    
-    
+use Atividade\Model\GerenciadorContato;
+
+//require 'model/GerenciadorContatos.php';
+
+class NewRegisterController{    
+
     const ROUTED_ON_THIS_PAGE = 'index';
     const LOGIN = 'login';
     const RESET = 'reset';
 
     public function __construct (){
         $this->handleRequest();
-    }
-
-    private function setNewSession(){
-        session_start();
-        $_SESSION['users'] = array();
-    }
-
-    private function addSession($newUser){
-        if (isset($_SESSION['users']) && isset($_SESSION))
-            echo 'teste';
     }
 
     private function requirePage(){
@@ -37,7 +31,7 @@ class novoController{
                 $this->loginAction();
                 break;
             case self::RESET:
-                $this.resetSession();
+                $this->resetSession();
                 break;
             default:
                 $this->requirePage();
@@ -45,7 +39,18 @@ class novoController{
     }
 
     private function loginAction(){
-        echo 'logged';
+
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+
+        if (empty($username) || empty($email))
+            $this->redirect ('NewRegisterController');
+
+        $gc = new GerenciadorContato();
+        $gc->set($username, $email);
+
+        $this->redirect('successRegister');
+
     }
 
     private function resetSession(){

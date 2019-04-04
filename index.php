@@ -3,36 +3,43 @@
 namespace Atividade;
 
 use Atividade\Controllers\controle;
-use Atividade\Controllers\novoController;
-use Atividade\Controllers\listController;
+use Atividade\Controllers\newRegisterController;
+use Atividade\Controllers\ListController;
 
 require 'controller/Controle.php';
 require 'controller/NewRegisterController.php';
 require 'controller/ListController.php';
 
-class index {
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-const NOVO_CADASTRO = 'NewRegisterController';
-const INITIAL_PAGE = 'index';
-const LIST = 'ListController';
+
+class index {
+    
+    const NOVO_CADASTRO = 'NewRegisterController';
+    const INITIAL_PAGE = 'index';
+    const LIST = 'ListController';
+    const SHOW_PAGE_SUCCESS_REGISTER = 'successRegister';
 
     public function __construct (){
         $this->handleRequest ();
     }
 
     private function handleRequest (){
-        
+       
         $page = isset($_GET['page']) ? $_GET['page'] : self::INITIAL_PAGE;
 
         echo '?: '.$page;
 
         switch ($page){
-
+            case self::SHOW_PAGE_SUCCESS_REGISTER:
+                new controle();
+                break;
             case self::NOVO_CADASTRO:
-                new novoController();
+                new newRegisterController();
                 break;
             case self::LIST:
-                new listController();
+                new ListController();
                 break;            
             default:
                 require 'view/index.php';
@@ -40,5 +47,8 @@ const LIST = 'ListController';
         }
     }
 }
+
+session_start();
+session_save_path();
 
 new index();
