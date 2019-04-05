@@ -14,24 +14,27 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 
-class index {
-    
+class index
+{
+
     const NOVO_CADASTRO = 'NewRegisterController';
     const INITIAL_PAGE = 'index';
     const LIST = 'ListController';
     const SHOW_PAGE_SUCCESS_REGISTER = 'successRegister';
 
-    public function __construct (){
-        $this->handleRequest ();
+    public function __construct()
+    {
+        $this->handleRequest();
     }
 
-    private function handleRequest (){
-       
+    private function handleRequest()
+    {
+
         $page = isset($_GET['page']) ? $_GET['page'] : self::INITIAL_PAGE;
 
         //echo '?: '.$page;
 
-        switch ($page){
+        switch ($page) {
             case self::SHOW_PAGE_SUCCESS_REGISTER:
                 new controle();
                 break;
@@ -40,7 +43,7 @@ class index {
                 break;
             case self::LIST:
                 new ListController();
-                break;            
+                break;
             default:
                 require 'view/index.php';
                 break;
@@ -48,7 +51,7 @@ class index {
     }
 }
 
-session_start();/* 
-session_save_path();
- */
+session_start(); 
+//session_save_path();
+
 new index();

@@ -8,10 +8,12 @@ use Atividade\Model\GerenciadorContato;
 require 'model/Contato.php';
 require 'model/GerenciadorContatos.php';
 
-class listController {
-    
-    public function __construct(){
-        
+class listController
+{
+
+    public function __construct()
+    {
+
         $gc = new GerenciadorContato();
 
         echo '<pre></pre>';
