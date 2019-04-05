@@ -8,17 +8,9 @@
     <link rel="stylesheet" type="text/css" href="css/mostra.css">
 </head>
 <body>
-<<<<<<< HEAD
-    <br/>
-    <br/>
-    See that man! It's WORKING!
-    <br/>
-
-=======
     
-    <div class="mensagem"> quero mostrar a mensagem aqui</div>
+    <div class="mensagem"> <p>quero mostrar a mensagem aqui</p></div>
     
->>>>>>> b49b37e2f476c8e0c0021d9335e5e8b4a254ab99
-    <a href="index.php?page=index.php">retornar</a>
+    <a href="index.php?page=index.php"></a>
 </body>
 </html>

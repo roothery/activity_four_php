@@ -2,26 +2,31 @@
 
 namespace Atividade\Controllers;
 
-class controle {
+use Lib\simple_html_dom;
+
+require 'lib/simple_html_dom.php';
+
+class controle{
 
     public function __construct() {
         $this->handleRequest();
     }
     
     public function handleRequest (){
-        require 'view/mostra.php';
 
-        $doc = new DOMDocument();
-        $localDiv = $doc->getElementByClassName("mensagem");
-
+        $simpleDOM = new simple_html_dom();
+        $simpleDOM->load_file('view/mostra.php');        
+        $localDiv = $simpleDOM->find('.mensagem', 0)->children(0);
+                
         $aviso = isset($_GET['aviso']) ? $_GET['aviso'] : 'false';
         
-        if($aviso == 'true'){
-            $localDiv->innerHTML = "See that man! It's WORKING";
-            //'quero colocar a mensagem no lugar correto!';
-        }else{
-            $localDiv->innerHTML = "Sorry man, try AGAIN!";
-            //echo 'quero colocar a mensagem no lugar correto!';
-        }
-    }
+        if($aviso == 'true')
+            $localDiv->innertext = 'See that man, It\'s WORKING!!!'; 
+        else
+            $localDiv->innertext = "Sorry man, try AGAIN!";
+        
+        echo $simpleDOM;
+        
+    } 
 }
+
