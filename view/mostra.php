@@ -14,6 +14,6 @@
     See that man! It's WORKING!
     <br/>
 
-    <a href="http://my/atividade04/index.php?page=index.php">retornar</a>
+    <a href="index.php?page=index.php">retornar</a>
 </body>
 </html>
