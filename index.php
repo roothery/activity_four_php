@@ -29,7 +29,7 @@ class index {
        
         $page = isset($_GET['page']) ? $_GET['page'] : self::INITIAL_PAGE;
 
-        echo '?: '.$page;
+        //echo '?: '.$page;
 
         switch ($page){
             case self::SHOW_PAGE_SUCCESS_REGISTER:

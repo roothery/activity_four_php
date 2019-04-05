@@ -24,7 +24,7 @@ class NewRegisterController{
         
         $pageParamn = isset($_GET['action']) ? $_GET['action'] : self::ROUTED_ON_THIS_PAGE;
 
-        echo '<br/>:: '.$pageParamn;
+        //echo '<br/>:: '.$pageParamn;
 
         switch($pageParamn) {
             case self::LOGIN:
@@ -44,12 +44,15 @@ class NewRegisterController{
         $email = $_POST['email'];
 
         if (empty($username) || empty($email))
-            $this->redirect ('NewRegisterController');
+            $this->redirect ('successRegister', 'false');
 
         $gc = new GerenciadorContato();
         $gc->set($username, $email);
 
-        $this->redirect('successRegister');
+        $this->redirect('successRegister', 'true');
+        //See that man! It's WORKING!
+
+        //Sorry man, try AGAIN!
 
     }
 
@@ -58,10 +61,10 @@ class NewRegisterController{
             unset($_SESSION['users']);
     }
 
-    private function redirect($page) {
+    private function redirect($page, $message) {
         ob_get_clean ();
         
-        header ('location: index.php?page='.$page);
+        header ('location: index.php?page='.$page.'&aviso='.$message);
 
         exit();
     }
