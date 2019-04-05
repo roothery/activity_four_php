@@ -59,12 +59,22 @@ class NewRegisterController{
     private function resetSession(){
         if (isset($_SESSION['users']))
             unset($_SESSION['users']);
+        
+        $this->redirectTo('index');
     }
 
     private function redirect($page, $message) {
         ob_get_clean ();
         
         header ('location: index.php?page='.$page.'&aviso='.$message);
+
+        exit();
+    }
+
+    private function redirectTo($page) {
+        ob_get_clean ();
+        
+        header ('location: index.php?page='.$page);
 
         exit();
     }
