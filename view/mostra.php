@@ -11,6 +11,6 @@
     
     <div class="mensagem"> <p>quero mostrar a mensagem aqui</p></div>
     
-    <a href="index.php?page=index.php"></a>
+    <a href="index.php?page=index.php"><br/>retornar</a>
 </body>
 </html>
