@@ -11,25 +11,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-main {
-  background: white;
-  margin: 20px 0;
-  padding: 10px;
-}
-
-.mensagem {
-  margin: 0 auto;
-  width: 200px auto;
-  padding: 20px;
-  color: white;
-  background: black;
-  text-align: center;
-}
-
-h1 {
-  width: 400px auto;
-}
-
 .button {
   margin: 10px auto;
   font-family: "Roboto", sans-serif;
@@ -44,4 +25,24 @@ h1 {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+}
+
+.lista_contato {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+div {
+  text-align: center;
+}
+
+h1 {
+  width: 100px auto;
 }

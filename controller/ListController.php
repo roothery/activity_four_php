@@ -9,13 +9,16 @@ use Lib\simple_html_dom;
 require 'model/Contato.php';
 require 'model/GerenciadorContatos.php';
 
-class listController {
-    
-    public function __construct(){
+class listController
+{
+
+    public function __construct()
+    {
         $this->handleListOfCOntacts();
     }
-    
-    private function handleListOfCOntacts(){
+
+    private function handleListOfCOntacts()
+    {
 
         //tive que deixar aqui e com require_once por conflito de estar aberto globalmente       
         require_once 'lib/simple_html_dom.php';
@@ -26,14 +29,14 @@ class listController {
         $DOM->load_file('view/lista.php');
 
         //$listDiv = $DOM->find('tag (como no css)', 'elementTag (se 1 => 0)');
-        $listDiv = $DOM->find('.teste', 0);
+        $listDiv = $DOM->find('.lista_contato', 0);
 
         $this->insertDiv($listDiv);
-
     }
 
-    private function insertDiv($DOMElement){
-        
+    private function insertDiv($DOMElement)
+    {
+
         $gerenciadorContato = new GerenciadorContato();
 
         $Contacts = array();
@@ -44,7 +47,8 @@ class listController {
 
         if (isset($Contacts))
             foreach ($Contacts as $key => $value) {
-                $buffer .= $value->toString().'<br/>';          // << here ** >>     
+                $buffer .= $value->toString() . '<br/>';          // << here ** >>   
+
             }
 
         /*
@@ -55,7 +59,7 @@ class listController {
             fica do jeito que você quiser personalizar para jogar no html.
 
         */
-        
+
         $DOMElement->innertext = $buffer;
 
         echo $DOMElement;

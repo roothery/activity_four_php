@@ -10,7 +10,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
 
     <main>
         <div class="mensagem">
@@ -18,13 +17,11 @@
         </div>
     </main>
 
-    <a href="index.php?page=index.php"></a>
-=======
-    
-    <div class="mensagem"> <p>quero mostrar a mensagem aqui</p></div>
-    
-    <a href="index.php?page=index.php"><br/>retornar</a>
->>>>>>> 4afe9812304c2e1adc658730b4ebf0fe025d5cf1
+    <!-- <a class="button" href="index.php?page=index.php">Retornar</a> -->
+    <form action="index.php?page=index.php">
+        <input class="button" type="submit" value="Retornar" />
+    </form>
+
 </body>
 
 </html>

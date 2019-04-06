@@ -51,7 +51,7 @@ class index
     }
 }
 
-session_start(); 
+session_start();
 //session_save_path();
 
 new index();

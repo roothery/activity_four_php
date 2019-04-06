@@ -15,15 +15,19 @@ class Contato
         $this->email = $email;
     }
 
-    public function getName(){
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function toString(){
-        return 'username: '.$this->name.' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; e-mail: '.$this->email;
+    public function toString()
+    {
+        return 'Nome:  ' . $this->name . ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; E-mail:  ' . $this->email;
     }
 }
