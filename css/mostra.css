@@ -1,5 +1,16 @@
-div{
-    border: red solid 1px;
-    padding: 10px;
-    margin: 10px;
+body {
+  background: #76b852;
+  background: -webkit-linear-gradient(right, #76b852, #8dc26f);
+  background: -moz-linear-gradient(right, #76b852, #8dc26f);
+  background: -o-linear-gradient(right, #76b852, #8dc26f);
+  background: linear-gradient(to left, #76b852, #8dc26f);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+div {
+  border: red solid 1px;
+  padding: 10px;
+  margin: 10px;
 }

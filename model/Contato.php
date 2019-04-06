@@ -2,16 +2,17 @@
 
 namespace Atividade\Model;
 
-class Contato {
+class Contato
+{
 
     private $name;
     private $email;
 
-    public function __construct($name, $email){
+    public function __construct($name, $email)
+    {
 
         $this->name = $name;
         $this->email = $email;
-
     }
 
     public function getName(){

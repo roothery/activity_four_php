@@ -16,18 +16,16 @@ class controle{
         require_once 'lib/simple_html_dom.php';
         
         $simpleDOM = new simple_html_dom();
-        $simpleDOM->load_file('view/mostra.php');        
+        $simpleDOM->load_file('view/mostra.php');
         $localDiv = $simpleDOM->find('.mensagem', 0)->children(0);
-                
+
         $aviso = isset($_GET['aviso']) ? $_GET['aviso'] : 'false';
-        
-        if($aviso == 'true')
-            $localDiv->innertext = 'See that man, It\'s WORKING!!!'; 
+
+        if ($aviso == 'true')
+            $localDiv->innertext = 'See that man, It\'s WORKING!!!';
         else
             $localDiv->innertext = "Sorry man, try AGAIN!";
-        
-        echo $simpleDOM;
-        
-    } 
-}
 
+        echo $simpleDOM;
+    }
+}
