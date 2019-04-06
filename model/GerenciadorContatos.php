@@ -29,19 +29,16 @@ class GerenciadorContato
         (isset($_SESSION['users']) && isset($_SESSION)) ? array_push($_SESSION['users'], $contato) : $this->newSession($contato);
     }
 
-    public function printContatos()
-    {
+    public function getAllContacts () {
 
-
+        $arrayOfContacts = array();       
+        
         if (isset($_SESSION['users']) && count($_SESSION['users']) > 0)
             foreach ($_SESSION['users'] as $key => $value) {
                 if ($value != null)
-                    echo $value->toString() . '<br/>';
+                    array_push($arrayOfContacts, $value);
             }
-    }
 
-    public function printt()
-    {
-        echo 'teste';
+        return $arrayOfContacts;
     }
 }

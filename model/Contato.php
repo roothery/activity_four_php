@@ -15,8 +15,15 @@ class Contato
         $this->email = $email;
     }
 
-    public function toString()
-    {
-        return 'username: ' . $this->name . ' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; e-mail: ' . $this->email;
+    public function getName(){
+        return $this->name;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function toString(){
+        return 'username: '.$this->name.' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; e-mail: '.$this->email;
     }
 }
