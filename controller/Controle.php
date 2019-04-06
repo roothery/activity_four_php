@@ -24,7 +24,7 @@ class controle
         $aviso = isset($_GET['aviso']) ? $_GET['aviso'] : 'false';
 
         if ($aviso == 'true')
-            $localDiv->innertext = 'See that man, It\'s WORKING!!!';
+            $localDiv->innertext = 'See that man, it\'s WORKING!!!';
         else
             $localDiv->innertext = "Sorry man, try AGAIN!";
 

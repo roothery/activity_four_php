@@ -9,8 +9,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-div {
-  border: red solid 1px;
+main {
+  background: white;
+  margin: 20px 0;
   padding: 10px;
-  margin: 10px;
+}
+
+.mensagem {
+  margin: 0 auto;
+  width: 200px auto;
+  padding: 20px;
+  color: white;
+  background: black;
+  text-align: center;
+}
+
+h1{
+  width: 400px auto;
 }
