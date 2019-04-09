@@ -2,9 +2,9 @@
 
 namespace Atividade;
 
-use Atividade\Controllers\controle;
-use Atividade\Controllers\newRegisterController;
-use Atividade\Controllers\ListController;
+use Activity\Controllers\controle;
+use Activity\Controllers\newRegisterController;
+use Activity\Controllers\ListController;
 
 require 'controller/Controle.php';
 require 'controller/NewRegisterController.php';
@@ -20,7 +20,7 @@ class index
     const NOVO_CADASTRO = 'NewRegisterController';
     const INITIAL_PAGE = 'index';
     const LIST = 'ListController';
-    const SHOW_PAGE_SUCCESS_REGISTER = 'successRegister';
+    const SHOW_PAGE_NEW_REGISTER = 'confirmNewRegister';
 
     public function __construct()
     {
@@ -35,7 +35,7 @@ class index
         //echo '?: '.$page;
 
         switch ($page) {
-            case self::SHOW_PAGE_SUCCESS_REGISTER:
+            case self::SHOW_PAGE_NEW_REGISTER:
                 new controle();
                 break;
             case self::NOVO_CADASTRO:

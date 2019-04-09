@@ -1,6 +1,6 @@
 <?php
 
-namespace Atividade\Model;
+namespace Activity\Model;
 
 class Contato
 {

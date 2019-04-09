@@ -1,6 +1,6 @@
 <?php
 
-namespace Atividade\Controllers;
+namespace Activity\Controllers;
 
 use Lib\simple_html_dom;
 
@@ -13,8 +13,7 @@ class controle
         $this->handleRequest();
     }
 
-    public function handleRequest()
-    {
+    public function handleRequest(){
 
         require_once 'lib/simple_html_dom.php';
 

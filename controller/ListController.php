@@ -1,13 +1,14 @@
 <?php
 
-namespace Atividade\Controllers;
+namespace Activity\Controllers;
 
-use Atividade\Model\Contato;
-use Atividade\Model\GerenciadorContato;
+use Activity\Model\Contato;
+use Activity\Model\GerenciadorContato;
+use Activity\Model\ContatoFactory;
 use Lib\simple_html_dom;
 
 require 'model/Contato.php';
-require 'model/GerenciadorContatos.php';
+require_once 'model/GerenciadorContatos.php';
 
 class listController
 {
@@ -22,7 +23,7 @@ class listController
 
         //tive que deixar aqui e com require_once por conflito de estar aberto globalmente       
         require_once 'lib/simple_html_dom.php';
-        require 'view/lista.php';
+        require_once 'view/lista.php';
 
         $DOM = new simple_html_dom();
 
@@ -37,6 +38,7 @@ class listController
     private function insertDiv($DOMElement)
     {
 
+        //$gerenciadorContato = new ContatoFactory();
         $gerenciadorContato = new GerenciadorContato();
 
         $Contacts = array();
