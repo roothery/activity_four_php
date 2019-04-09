@@ -28,3 +28,26 @@ Deve possuir a seguinte estrutura de arquivos:
 2.     Utilizar utilizar sessão ($_SESSION) para armazenar os contatos cadastrados.
 
 3.     Nesse exercício, não é necessário implementar a persistência com Banco de Dados.
+
+--------------------------------------------------
+
+### EXERCÍCIO 5 - PHP + BD (DUPLA) ###
+--------------------------------------------------
+
+Evoluir a WebApp do exercício 04:
+
+* Ao cadastrar um novo contato, o gerenciador de contatos (renomear para `ContatoFactory`) deve verificar se o e-mail já está cadastrado no Banco.
+
+* Em caso negativo, incluir o contato.
+
+* Em caso positivo, deve retornar uma mensagem de erro.
+
+* Para tanto, é necessário implementar um novo método para busca de contatos pelo e-mail
+
+
+
+* Utilizar PDO para conexão com banco.
+
+* Utilizar banco de dados SQLite. Salvar o arquivo do banco em  "Model/DBContato.sqlite"
+
+Obs: Foi mantido o modo anterior de armazenamento com uso de uma varável global **DATABASE_MODE** em global/App.php.

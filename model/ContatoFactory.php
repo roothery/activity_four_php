@@ -124,7 +124,6 @@ class ContatoFactory implements DataBase{
         try{
             $this->connectorDataBase->exec('DROP TABLE contacts');
         }catch(\PDOException $exception){
-            echo 'not drop';
         }
     }
 
