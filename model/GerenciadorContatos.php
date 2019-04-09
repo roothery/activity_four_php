@@ -18,6 +18,8 @@ class GerenciadorContato implements DataBase
         $contact = new Contato($username, $email);
 
         $this->addSession($contact);
+
+        return true;
     }
 
     private function newSession($contato)

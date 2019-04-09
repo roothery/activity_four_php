@@ -6,6 +6,7 @@ use Activity\Model\Contato;
 use Activity\Model\GerenciadorContato;
 use Activity\Model\ContatoFactory;
 use Lib\simple_html_dom;
+use App\APP;
 
 require 'model/Contato.php';
 require_once 'model/GerenciadorContatos.php';
@@ -37,9 +38,8 @@ class listController
 
     private function insertDiv($DOMElement)
     {
-
-        //$gerenciadorContato = new ContatoFactory();
-        $gerenciadorContato = new GerenciadorContato();
+               
+        APP::DATABASE_MODE == 'SESSION' ? $gerenciadorContato = new GerenciadorContato() : $gerenciadorContato = new ContatoFactory();
 
         $Contacts = array();
 

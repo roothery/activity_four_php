@@ -56,11 +56,9 @@ class NewRegisterController
             $this->redirect('confirmNewRegister', 'false');
 
         /* dataManager is responsable to tell who's save the data */
-        $dataManager = new GerenciadorContato();
-        //$dataManager = new ContatoFactory();
-        $dataManager->set($username, $email);
-
-        $this->redirect('confirmNewRegister', 'true');
+        APP::DATABASE_MODE == 'SESSION' ? $dataManager = new GerenciadorContato() : $dataManager = new ContatoFactory();
+        
+        $dataManager->set($username, $email) ? $this->redirect('confirmNewRegister', 'true') : $this->redirect('confirmNewRegister', 'false');
 
         //See that man! It's WORKING!
         //Sorry man, try AGAIN!
@@ -81,10 +79,11 @@ class NewRegisterController
 
     private function resetDatabase(){
 
-        echo 'reseting..';
-        
-        /* Por enquanto é para dar erro com o intuito de parar a execução mesmo - falta o $this */
-        redirectTo('index');
+        $dataManager = new ContatoFactory();
+
+        $dataManager->destroy();
+
+        $this->redirectTo('index');
     }
 
     private function redirect($page, $message)
