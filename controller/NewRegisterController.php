@@ -1,10 +1,13 @@
 <?php
 
-namespace Atividade\Controllers;
+namespace Activity\Controllers;
 
-use Atividade\Model\GerenciadorContato;
+use Activity\Model\GerenciadorContato;
+use Activity\Model\ContatoFactory;
+use App\APP;
 
-//require 'model/GerenciadorContatos.php';
+require 'global/App.php';
+require 'model/ContatoFactory.php';
 
 class NewRegisterController
 {
@@ -35,7 +38,7 @@ class NewRegisterController
                 $this->loginAction();
                 break;
             case self::RESET:
-                $this->resetSession();
+                $this->reset();
                 break;
             default:
                 $this->requirePage();
@@ -44,27 +47,41 @@ class NewRegisterController
 
     private function loginAction()
     {
+        //require 'model/GerenciadorContatos.php';
 
         $username = $_POST['username'];
         $email = $_POST['email'];
 
         if (empty($username) || empty($email))
-            $this->redirect('successRegister', 'false');
+            $this->redirect('confirmNewRegister', 'false');
 
-        $gc = new GerenciadorContato();
-        $gc->set($username, $email);
-
-        $this->redirect('successRegister', 'true');
+        /* dataManager is responsable to tell who's save the data */
+        APP::DATABASE_MODE == 'SESSION' ? $dataManager = new GerenciadorContato() : $dataManager = new ContatoFactory();
+        
+        $dataManager->set($username, $email) ? $this->redirect('confirmNewRegister', 'true') : $this->redirect('confirmNewRegister', 'false');
 
         //See that man! It's WORKING!
         //Sorry man, try AGAIN!
 
     }
 
+    private function reset(){
+        APP::DATABASE_MODE == 'SESSION' ? $this->resetSession() : $this->resetDatabase();
+    }
+
     private function resetSession()
     {
         if (isset($_SESSION['users']))
             unset($_SESSION['users']);
+
+        $this->redirectTo('index');
+    }
+
+    private function resetDatabase(){
+
+        $dataManager = new ContatoFactory();
+
+        $dataManager->destroy();
 
         $this->redirectTo('index');
     }

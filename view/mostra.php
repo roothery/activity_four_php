@@ -13,7 +13,7 @@
 
     <main>
         <div class="mensagem">
-            <h1>Mostar mensagem aqui</h1>
+            <h1>Mostrar mensagem aqui</h1>
         </div>
     </main>
 

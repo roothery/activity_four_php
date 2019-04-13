@@ -1,12 +1,15 @@
 <?php
 
-namespace Atividade\Model;
+namespace Activity\Model;
 
-use Atividade\Model\Contato;
+use Activity\Model\Contato;
+use Activity\ConnectDataBase\DataBase;
+
+require_once 'interface/DataBase.php';
 
 session_name('Atividade');
 
-class GerenciadorContato
+class GerenciadorContato implements DataBase
 {
 
     public function set($username, $email)
@@ -15,6 +18,8 @@ class GerenciadorContato
         $contact = new Contato($username, $email);
 
         $this->addSession($contact);
+
+        return true;
     }
 
     private function newSession($contato)
@@ -24,7 +29,7 @@ class GerenciadorContato
         array_push($_SESSION['users'], $contato);
     }
 
-    public function addSession($contato)
+    private function addSession($contato)
     {
         (isset($_SESSION['users']) && isset($_SESSION)) ? array_push($_SESSION['users'], $contato) : $this->newSession($contato);
     }
