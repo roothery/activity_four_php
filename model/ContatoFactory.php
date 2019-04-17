@@ -51,8 +51,9 @@ class ContatoFactory implements DataBase
     {
 
         $query = 'CREATE TABLE IF NOT EXISTS contacts(
+                    id INT AUTOINCREMENT PRIMARY KEY,
                     name_ TEXT NOT NULL,
-                    email TEXT NOT NULL PRIMARY KEY
+                    email TEXT NOT NULL 
                     );';
         try {
             $this->connectorDataBase->exec($query);
@@ -75,12 +76,37 @@ class ContatoFactory implements DataBase
                 if (isset($contacts))
                     foreach ($contacts as $row) {
                         $contact = new Contato($row['name_'], $row['email']);
+                        $contact->setId($row['id']);
+                        echo $row['id'];
                         array_push($arrayOfContacts, $contact);
                     }
             } catch (\PDOException $exception) { }
         }
         return $arrayOfContacts;
     }
+
+    public function getContactsById($id)
+    {
+        require_once 'model/Contato.php';
+        $arrayOfContacts = array();
+        $this->connect();
+        if ($this->connectorDataBase != null) {
+            $contacts;
+
+            try {
+                $contacts = $this->connectorDataBase->query('SELECT * FROM contacts WHERE ' . $id . ' = ?');
+                $statement->execute([$id]);
+                if (isset($contacts))
+                    foreach ($contacts as $row) {
+                        $contact = new Contato($row['name_'], $row['email']);
+                        $contact->setId($row['id']);
+                        array_push($arrayOfContacts, $contact);
+                    }
+            } catch (\PDOException $exception) { }
+        }
+        return $arrayOfContacts;
+    }
+
     public function destroy()
     {
 

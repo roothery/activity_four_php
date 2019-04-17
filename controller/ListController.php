@@ -36,6 +36,7 @@ class ListController
         $buffer =
             '
         <tr>
+            <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
         </tr>
@@ -45,6 +46,7 @@ class ListController
                 $buffer .=
                 '
                 <tr>
+                    <td>'.$value->getId().'</td>
                     <td>'.$value->getName().'</td>
                     <td>'.$value->getEmail().'</td>
                 </tr>
