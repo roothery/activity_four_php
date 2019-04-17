@@ -1,5 +1,4 @@
 <?php
-
 namespace Atividade;
 
 use Activity\Controllers\controle;
@@ -9,31 +8,22 @@ use Activity\Controllers\ListController;
 require 'controller/Controle.php';
 require 'controller/NewRegisterController.php';
 require 'controller/ListController.php';
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
-
 class index
 {
-
     const NOVO_CADASTRO = 'NewRegisterController';
     const INITIAL_PAGE = 'index';
     const LIST = 'ListController';
     const SHOW_PAGE_NEW_REGISTER = 'confirmNewRegister';
-
     public function __construct()
     {
         $this->handleRequest();
     }
-
     private function handleRequest()
     {
-
         $page = isset($_GET['page']) ? $_GET['page'] : self::INITIAL_PAGE;
-
         //echo '?: '.$page;
-
         switch ($page) {
             case self::SHOW_PAGE_NEW_REGISTER:
                 new controle();
@@ -50,8 +40,6 @@ class index
         }
     }
 }
-
 session_start();
 //session_save_path();
-
 new index();

@@ -17,7 +17,6 @@
         </div>
     </main>
 
-    <!-- <a class="button" href="index.php?page=index.php">Retornar</a> -->
     <form action="index.php?page=index.php">
         <input class="button" type="submit" value="Retornar" />
     </form>
