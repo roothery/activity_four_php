@@ -106,6 +106,22 @@ class ContatoFactory implements DataBase
         return $arrayOfContacts;
     }
 
+    public function deleteContact($id){
+
+        echo 'DELETE FROM contacts WHERE id ='.$id,';';
+
+        $this->connect();
+
+        try{
+            
+            $statement = $this->connectorDataBase->query('DELETE FROM contacts WHERE id = ?;');          
+            $statement->execute([$id]);  
+
+        }catch (\PDOException $ex){
+            echo 'not funfa!';
+        }
+    }
+
     public function destroy()
     {
 

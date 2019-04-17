@@ -51,3 +51,27 @@ Evoluir a WebApp do exercício 04:
 * Utilizar banco de dados SQLite. Salvar o arquivo do banco em  "Model/DBContato.sqlite"
 
 Obs: Foi mantido o modo anterior de armazenamento com uso de uma varável global **DATABASE_MODE** em global/App.php.
+
+### EXERCÍCIO 6 - PHP - LISTAR E EDITAR (DUPLA) ###
+Listagem de contatos
+
+Evoluir a WebApp do exercício 05:
+
+·      Implementar a listagem de contatos:
+
+o   Implementar o método buscarContatos no ContatoFactory.php.
+
+o   Editar o lista.php.
+
+Edição de  contatos
+
+·      Implementar a funcionalidade de editar objetos do banco.
+
+·      Alterar a classe Contato, criando o atributo "id".
+
+·      No listar.php colocar um link para permitir edição, exemplo: ".../controle.php?op=edt&id=7"
+
+·      Buscar pelo id e carregar os dados no editar.php (view) NÃO CONTA COMO EXERCÍCIO!
+
+Remocão de  contatos
+     Implemente a remoção de contatos semelhante ao editar, porém remova o contato imediatamente depois que o usuário clicar no link [remover] da sua listagem.

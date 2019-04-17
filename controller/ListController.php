@@ -91,6 +91,11 @@ class ListController
     private function deleteAction()
     { 
         // Precisa deletar e mostrar novamente a lista (createlist)
+        $gerenciador_database = new ContatoFactory();
+
+        if (isset($_GET['id']))
+            $gerenciador_database->deleteContact($_GET['id']);
+
         $this->createList();
     }
 }
