@@ -51,7 +51,7 @@ class ContatoFactory implements DataBase
     {
 
         $query = 'CREATE TABLE IF NOT EXISTS contacts(
-                    id INT AUTOINCREMENT PRIMARY KEY,
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name_ TEXT NOT NULL,
                     email TEXT NOT NULL 
                     );';
@@ -77,7 +77,6 @@ class ContatoFactory implements DataBase
                     foreach ($contacts as $row) {
                         $contact = new Contato($row['name_'], $row['email']);
                         $contact->setId($row['id']);
-                        echo $row['id'];
                         array_push($arrayOfContacts, $contact);
                     }
             } catch (\PDOException $exception) { }

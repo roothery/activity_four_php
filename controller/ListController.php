@@ -12,11 +12,15 @@ require_once 'model/GerenciadorContatos.php';
 
 class ListController
 {
+    const EDIT = 'edit';
+    const DELETE = 'delete';
+    const LIST = '';
+
     public function __construct()
     {
         $this->handleListOfCOntacts();
     }
-    private function handleListOfCOntacts()
+    private function createList()
     {
         //tive que deixar aqui e com require_once por conflito de estar aberto globalmente       
         require_once 'lib/simple_html_dom.php';
@@ -27,6 +31,23 @@ class ListController
         $listDiv = $DOM->find('.tabela_contato', 0);
         $this->insertDiv($listDiv);
     }
+
+    private function handleListOfCOntacts()
+    {
+        $pageParamn = isset($_GET['action']) ? $_GET['action'] : self::LIST;
+        //echo '<br/>:: '.$pageParamn;
+        switch ($pageParamn) {
+            case self::EDIT:
+                $this->editAction();
+                break;
+            case self::DELETE:
+                $this->deleteAction();
+                break;
+            default:
+                $this->createList();
+        }
+    }
+
     private function insertDiv($DOMElement)
     {
 
@@ -39,21 +60,37 @@ class ListController
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
+            <th>Option</th>
         </tr>
         ';
         if (isset($Contacts))
             foreach ($Contacts as $key => $value) {
                 $buffer .=
-                '
+                    '
                 <tr>
-                    <td>'.$value->getId().'</td>
-                    <td>'.$value->getName().'</td>
-                    <td>'.$value->getEmail().'</td>
+                    <td>' . $value->getId() . '</td>
+                    <td>' . $value->getName() . '</td>
+                    <td>' . $value->getEmail() . '</td>
+                    <td><a href="index.php?page=ListController&action=edit&id=' . $value->getId() . '">editar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="index.php?page=ListController&action=delete&id=' . $value->getId() . '">excluir</a></td>
                 </tr>
                 ';
             }
-        
+
         $DOMElement->innertext = $buffer;
         echo $DOMElement;
+    }
+
+    private function editAction()
+    { 
+        ob_get_clean();
+        header('location: index.php?page=EditPage');
+        exit();
+    }
+
+    private function deleteAction()
+    { 
+        // Precisa deletar e mostrar novamente a lista (createlist)
+        $this->createList();
     }
 }
