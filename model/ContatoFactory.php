@@ -49,7 +49,6 @@ class ContatoFactory implements DataBase
     }
     private function create()
     {
-
         $query = 'CREATE TABLE IF NOT EXISTS contacts(
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name_ TEXT NOT NULL,
@@ -106,25 +105,30 @@ class ContatoFactory implements DataBase
         return $arrayOfContacts;
     }
 
-    public function deleteContact($id){
-
-        echo 'DELETE FROM contacts WHERE id ='.$id,';';
-
+    public function deleteContact($id)
+    {
         $this->connect();
-
-        try{
-            
-            $statement = $this->connectorDataBase->query('DELETE FROM contacts WHERE id = ?;');          
-            $statement->execute([$id]);  
-
-        }catch (\PDOException $ex){
+        try {
+            $statement = $this->connectorDataBase->query('DELETE FROM contacts WHERE id = ?;');
+            $statement->execute([$id]);
+        } catch (\PDOException $ex) {
             echo 'not funfa!';
+        }
+    }
+
+    public function editContact($name_, $email, $id)
+    {
+        $this->connect();
+        try {
+            $statement = $this->connectorDataBase->query('UPDATE contacts SET name_ = ?, email = ? WHERE id = ?;');
+            $statement->execute([$name_, $email, $id]);
+        } catch (\PDOException $ex) {
+            echo 'fail a edição!';
         }
     }
 
     public function destroy()
     {
-
         $this->connect();
         try {
             $this->connectorDataBase->exec('DROP TABLE contacts');

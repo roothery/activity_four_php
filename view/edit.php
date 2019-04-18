@@ -12,12 +12,12 @@
 <body>
 
     <div class="login-page">
-        <form method="POST" action="index.php?page=EditPage&action=confirm">
-            <div class="form">
-                <input type="text" name="username" placeholder="Nome" />
-                <input type="email" name="email" placeholder="Email" />
-                <button type="submit" class="button-left">editar</button>
-            </div>
+        <?php echo '<form method="POST" action="index.php?page=EditPage&action=confirm&id=' . $_GET['id'] . '">'; ?>
+        <div class="form">
+            <input type="text" name="username" placeholder="Nome" />
+            <input type="email" name="email" placeholder="Email" />
+            <button type="submit" class="button-left">editar</button>
+        </div>
     </div>
 </body>
 

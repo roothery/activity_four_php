@@ -36,6 +36,8 @@ class EditController
 
     private function confirmAction()
     {
+        $gerenciador_contato = new ContatoFactory();
+        $gerenciador_contato->editContact($_POST['username'], $_POST['email'], $_GET['id']);
         $this->redirect();
     }
 

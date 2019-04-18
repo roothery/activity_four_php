@@ -84,7 +84,7 @@ class ListController
     private function editAction()
     { 
         ob_get_clean();
-        header('location: index.php?page=EditPage');
+        header('location: index.php?page=EditPage&id='.$_GET['id']);
         exit();
     }
 
