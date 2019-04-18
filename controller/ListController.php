@@ -1,67 +1,101 @@
 <?php
+namespace Activity\Controllers;
 
-namespace Atividade\Controllers;
-
-use Atividade\Model\Contato;
-use Atividade\Model\GerenciadorContato;
+use Activity\Model\Contato;
+use Activity\Model\GerenciadorContato;
+use Activity\Model\ContatoFactory;
 use Lib\simple_html_dom;
+use App\APP;
 
 require 'model/Contato.php';
-require 'model/GerenciadorContatos.php';
+require_once 'model/GerenciadorContatos.php';
 
-class listController
+class ListController
 {
+    const EDIT = 'edit';
+    const DELETE = 'delete';
+    const LIST = '';
 
     public function __construct()
     {
         $this->handleListOfCOntacts();
     }
+    private function createList()
+    {
+        //tive que deixar aqui e com require_once por conflito de estar aberto globalmente       
+        require_once 'lib/simple_html_dom.php';
+        require_once 'view/lista.php';
+        $DOM = new simple_html_dom();
+        $DOM->load_file('view/lista.php');
+        //$listDiv = $DOM->find('tag (como no css)', 'elementTag (se 1 => 0)');
+        $listDiv = $DOM->find('.tabela_contato', 0);
+        $this->insertDiv($listDiv);
+    }
 
     private function handleListOfCOntacts()
     {
-
-        //tive que deixar aqui e com require_once por conflito de estar aberto globalmente       
-        require_once 'lib/simple_html_dom.php';
-        require 'view/lista.php';
-
-        $DOM = new simple_html_dom();
-
-        $DOM->load_file('view/lista.php');
-
-        //$listDiv = $DOM->find('tag (como no css)', 'elementTag (se 1 => 0)');
-        $listDiv = $DOM->find('.lista_contato', 0);
-
-        $this->insertDiv($listDiv);
+        $pageParamn = isset($_GET['action']) ? $_GET['action'] : self::LIST;
+        //echo '<br/>:: '.$pageParamn;
+        switch ($pageParamn) {
+            case self::EDIT:
+                $this->editAction();
+                break;
+            case self::DELETE:
+                $this->deleteAction();
+                break;
+            default:
+                $this->createList();
+        }
     }
 
     private function insertDiv($DOMElement)
     {
 
-        $gerenciadorContato = new GerenciadorContato();
-
+        APP::DATABASE_MODE == 'SESSION' ? $gerenciadorContato = new GerenciadorContato() : $gerenciadorContato = new ContatoFactory();
         $Contacts = array();
-
         $Contacts = $gerenciadorContato->getAllContacts();
-
-        $buffer = '';
-
+        $buffer =
+            '
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Option</th>
+        </tr>
+        ';
         if (isset($Contacts))
             foreach ($Contacts as $key => $value) {
-                $buffer .= $value->toString() . '<br/>';          // << here ** >>   
-
+                $buffer .=
+                    '
+                <tr>
+                    <td>' . $value->getId() . '</td>
+                    <td>' . $value->getName() . '</td>
+                    <td>' . $value->getEmail() . '</td>
+                    <td><a href="index.php?page=ListController&action=edit&id=' . $value->getId() . '">editar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="index.php?page=ListController&action=delete&id=' . $value->getId() . '">excluir</a></td>
+                </tr>
+                ';
             }
 
-        /*
-
-            Caso você queira organizar de forma diferente na linha << here ** >>
-            dá para pegar com $value->getName() e com $value->getEmail() alem do que já está.
-            o que acontece é que você terá que concatenar com <br/> ou <la></la> ou <li></li>
-            fica do jeito que você quiser personalizar para jogar no html.
-
-        */
-
         $DOMElement->innertext = $buffer;
-
         echo $DOMElement;
+    }
+
+    private function editAction()
+    { 
+        ob_get_clean();
+        header('location: index.php?page=EditPage&id='.$_GET['id']);
+        exit();
+    }
+
+    private function deleteAction()
+    { 
+        // Precisa deletar e mostrar novamente a lista (createlist)
+        $gerenciador_database = new ContatoFactory();
+
+        if (isset($_GET['id']))
+            $gerenciador_database->deleteContact($_GET['id']);
+
+        $this->createList();
     }
 }

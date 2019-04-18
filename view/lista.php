@@ -20,6 +20,8 @@
         <h1>Lista de Contatos</h1>
     </div>
 
+    <table class="tabela_contato"></table>
+
 </body>
 
 </html>
