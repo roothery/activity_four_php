@@ -37,6 +37,11 @@ class EditController
     private function confirmAction()
     {
         $gerenciador_contato = new ContatoFactory();
+
+        /* Existe também a possibilidade de criação de um objeto Contato, ou mesmo reaproveitar $contact,
+        (se fizesse por dom) e setar post's e get para esse objeto, para assim, passa-lo como parametro 
+        para editContact */
+
         $gerenciador_contato->editContact($_POST['username'], $_POST['email'], $_GET['id']);
         $this->redirect();
     }

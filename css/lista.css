@@ -12,6 +12,7 @@ body {
 }
 
 .button {
+  float: left;
   margin: 10px auto;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -37,6 +38,7 @@ body {
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
+  height: 120px;
 }
 
 div {
@@ -68,4 +70,78 @@ td,th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+.option-page {
+  padding: 5px;
+  overflow: auto;
+  width: auto;
+  height: auto;
+}
+
+.search { 
+  float: right;
+  background-color:#f2f2f2;
+  border:solid 2px;
+  border-radius:15px;
+  border-color: #999;
+  margin-top: 15px;
+  height: auto;
+  width:auto;
+}
+
+.search input {
+  float:left;
+  color: rgb(136, 127, 127);
+  background-color:transparent;
+  margin: 7px 10px 0 20px;
+  font-size:18px;
+  border:none;
+  height: auto;
+  width: 120px;
+  outline: none;
+  font-size: 12px;
+}
+
+.search input::-webkit-input-placeholder {
+  color: rgb(136, 127, 127);
+  outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: rgb(136, 127, 127) !important;
+}
+
+.search button {
+  background-color: transparent;
+  border: none;
+  height: 30px;
+  width: 30px;
+}
+
+#search-icon{
+  max-width: 15px;
+  max-height: 15px;
+  height: auto;
+  width: auto;
+
+}
+
+.lista_contato a {
+  text-decoration: none;
+  background-color: #e4dede;
+  padding: 3px 8px 3px 8px;
+  color: #444;
+  border: #999 solid 1px;
+  font-size: 13px;
+}
+
+.lista_contato a:hover {
+  background-color: #e2d8d8;
+  border: #bbb solid 1px;
+  color: #555;
 }

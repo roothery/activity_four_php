@@ -12,12 +12,28 @@
 
 <body>
 
-    <form action="index.php?page=index.php">
-        <input class="button" type="submit" value="Retornar" />
-    </form>
+    <div class="option-page">
+    
+        <form action="index.php?page=index.php">
+            <input class="button" type="submit" value="Retornar" />
+        </form>
+
+        <div class=search>
+            <form method="POST" action="index.php?page=ListController&action=search">
+            <input type="text" id="search-field" name="id" placeholder="pesquisar..."/>
+            <button type="submit">
+                <img src="images/lupa.png" id="search-icon"/>
+            </button>
+        </div>
+        
+        <div class="q">
+        </div>
+    
+    </div>
 
     <div class="lista_contato">
         <h1>Lista de Contatos</h1>
+        <a href="index.php?page=ListController">todos contatos</a>
     </div>
 
     <table class="tabela_contato"></table>

@@ -86,23 +86,25 @@ class ContatoFactory implements DataBase
     public function getContactsById($id)
     {
         require_once 'model/Contato.php';
-        $arrayOfContacts = array();
+
+        #mantive array por causa da query
+        $contactToReturn = array();
         $this->connect();
         if ($this->connectorDataBase != null) {
             $contacts;
 
             try {
-                $contacts = $this->connectorDataBase->query('SELECT * FROM contacts WHERE ' . $id . ' = ?');
-                $statement->execute([$id]);
+                $contacts = $this->connectorDataBase->query('SELECT * FROM contacts WHERE id = ?');
+                $contacts->execute([$id]);
                 if (isset($contacts))
                     foreach ($contacts as $row) {
                         $contact = new Contato($row['name_'], $row['email']);
                         $contact->setId($row['id']);
-                        array_push($arrayOfContacts, $contact);
+                        array_push($contactToReturn, $contact);
                     }
             } catch (\PDOException $exception) { }
         }
-        return $arrayOfContacts;
+        return $contactToReturn;
     }
 
     public function deleteContact($id)
