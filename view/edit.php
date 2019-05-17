@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="images/logo.jpg">
     <title>Contanto</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/novo.css">
@@ -20,14 +21,17 @@
         ===============================================================================*/
 
         use Activity\Model\ContatoFactory;
+        use Activity\Model\GerenciadorContato;
         use Activity\Model\Contato;
+        use App\APP;
 
         require_once 'model/ContatoFactory.php';
         require_once 'model/Contato.php';
 
-        $gerenciadorContato = new ContatoFactory();
-
         $contact = array();
+
+        APP::DATABASE_MODE == 'SESSION' ? $gerenciadorContato = new GerenciadorContato() : $gerenciadorContato = new ContatoFactory();
+        
         $contact = $gerenciadorContato->getContactsById($_GET['id']);
 
         echo '<form method="POST" action="index.php?page=EditPage&action=confirm&id=' . $_GET['id'] . '">

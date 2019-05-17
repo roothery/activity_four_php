@@ -7,6 +7,7 @@ class App
      *   DATABASE_MODE = 'SESSION;
      *   DATABASE_MODE = 'SQLITE';
      **/
+    
     const DATABASE_MODE = 'SQLITE';
     const PATH_SQLITE = 'model/DBContato.sqlite';
 }

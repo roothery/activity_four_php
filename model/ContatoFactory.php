@@ -1,4 +1,5 @@
 <?php
+
 namespace Activity\Model;
 
 use Activity\Model\Contato;
@@ -7,15 +8,19 @@ use App\APP;
 
 require_once 'interface/DataBase.php';
 date_default_timezone_set('UTC');
+
+
 class ContatoFactory implements DataBase
 {
 
     private $connectorDataBase;
 
+    
     public function set($username, $email)
     {
         $this->connect();
         $this->create();
+        
         if (!$this->contain($email, 'email')) {
             $insert =   'INSERT INTO contacts ( name_, email )
                          VALUES (:name_, :email)';
@@ -29,6 +34,8 @@ class ContatoFactory implements DataBase
         }
         return false;
     }
+
+
     private function contain($param, $collumnTable)
     {
         $statement = $this->connectorDataBase->query('SELECT * FROM contacts WHERE ' . $collumnTable . ' = ?');
@@ -38,6 +45,8 @@ class ContatoFactory implements DataBase
                 return true;
         return false;
     }
+
+
     private function connect()
     {
         try {
@@ -47,6 +56,8 @@ class ContatoFactory implements DataBase
             echo $exception->getMessage();
         }
     }
+
+
     private function create()
     {
         $query = 'CREATE TABLE IF NOT EXISTS contacts(
@@ -60,6 +71,7 @@ class ContatoFactory implements DataBase
             echo $exception->getMessage();
         }
     }
+
 
     public function getAllContacts()
     {
@@ -82,6 +94,7 @@ class ContatoFactory implements DataBase
         }
         return $arrayOfContacts;
     }
+
 
     public function getContactsById($id)
     {
@@ -107,6 +120,7 @@ class ContatoFactory implements DataBase
         return $contactToReturn;
     }
 
+    
     public function deleteContact($id)
     {
         $this->connect();
@@ -118,6 +132,7 @@ class ContatoFactory implements DataBase
         }
     }
 
+
     public function editContact($name_, $email, $id)
     {
         $this->connect();
@@ -128,6 +143,7 @@ class ContatoFactory implements DataBase
             echo 'fail a edição!';
         }
     }
+
 
     public function destroy()
     {
