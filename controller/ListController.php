@@ -12,25 +12,17 @@ require_once 'model/GerenciadorContatos.php';
 
 class ListController
 {
+
     const EDIT = 'edit';
     const DELETE = 'delete';
     const LIST = '';
+
 
     public function __construct()
     {
         $this->handleListOfCOntacts();
     }
-    private function createList()
-    {
-        //tive que deixar aqui e com require_once por conflito de estar aberto globalmente       
-        require_once 'lib/simple_html_dom.php';
-        require_once 'view/lista.php';
-        $DOM = new simple_html_dom();
-        $DOM->load_file('view/lista.php');
-        //$listDiv = $DOM->find('tag (como no css)', 'elementTag (se 1 => 0)');
-        $listDiv = $DOM->find('.tabela_contato', 0);
-        $this->insertDiv($listDiv);
-    }
+
 
     private function handleListOfCOntacts()
     {
@@ -48,21 +40,40 @@ class ListController
         }
     }
 
+
+    private function createList()
+    {
+        //tive que deixar aqui e com require_once por conflito de estar aberto globalmente       
+        require_once 'lib/simple_html_dom.php';
+        require_once 'view/lista.php';
+        $DOM = new simple_html_dom();
+        $DOM->load_file('view/lista.php');
+        
+        //$listDiv = $DOM->find('tag (como no css)', 'elementTag (se 1 => 0)');
+        $listDiv = $DOM->find('.tabela_contato', 0);
+        $this->insertDiv($listDiv);
+    }
+
+
     private function insertDiv($DOMElement)
     {
-
-        APP::DATABASE_MODE == 'SESSION' ? $gerenciadorContato = new GerenciadorContato() : $gerenciadorContato = new ContatoFactory();
+        
         $Contacts = array();
-        $Contacts = $gerenciadorContato->getAllContacts();
+        
+        APP::DATABASE_MODE == 'SESSION' ? $gerenciadorContato = new GerenciadorContato() : $gerenciadorContato = new ContatoFactory();
+        
+        $existsSearch = isset($_GET['action']) && $_GET['action'] == 'search' ? true : false;
+        
+        $Contacts = $existsSearch ? $gerenciadorContato->getContactsById($_POST['id']) : $gerenciadorContato->getAllContacts();
+        
         $buffer =
-            '
-        <tr>
+        '<tr>
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Option</th>
-        </tr>
-        ';
+         </tr>';
+         
         if (isset($Contacts))
             foreach ($Contacts as $key => $value) {
                 $buffer .=
@@ -81,20 +92,22 @@ class ListController
         echo $DOMElement;
     }
 
+
     private function editAction()
     { 
         ob_get_clean();
         header('location: index.php?page=EditPage&id='.$_GET['id']);
         exit();
     }
+    
 
     private function deleteAction()
     { 
         // Precisa deletar e mostrar novamente a lista (createlist)
-        $gerenciador_database = new ContatoFactory();
+        APP::DATABASE_MODE == 'SESSION' ? $gerenciadorContato = new GerenciadorContato() : $gerenciadorContato = new ContatoFactory();
 
         if (isset($_GET['id']))
-            $gerenciador_database->deleteContact($_GET['id']);
+            $gerenciadorContato->deleteContact($_GET['id']);
 
         $this->createList();
     }

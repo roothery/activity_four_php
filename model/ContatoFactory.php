@@ -1,4 +1,5 @@
 <?php
+
 namespace Activity\Model;
 
 use Activity\Model\Contato;
@@ -7,15 +8,19 @@ use App\APP;
 
 require_once 'interface/DataBase.php';
 date_default_timezone_set('UTC');
+
+
 class ContatoFactory implements DataBase
 {
 
     private $connectorDataBase;
 
+    
     public function set($username, $email)
     {
         $this->connect();
         $this->create();
+        
         if (!$this->contain($email, 'email')) {
             $insert =   'INSERT INTO contacts ( name_, email )
                          VALUES (:name_, :email)';
@@ -29,6 +34,8 @@ class ContatoFactory implements DataBase
         }
         return false;
     }
+
+
     private function contain($param, $collumnTable)
     {
         $statement = $this->connectorDataBase->query('SELECT * FROM contacts WHERE ' . $collumnTable . ' = ?');
@@ -38,6 +45,8 @@ class ContatoFactory implements DataBase
                 return true;
         return false;
     }
+
+
     private function connect()
     {
         try {
@@ -47,6 +56,8 @@ class ContatoFactory implements DataBase
             echo $exception->getMessage();
         }
     }
+
+
     private function create()
     {
         $query = 'CREATE TABLE IF NOT EXISTS contacts(
@@ -60,6 +71,7 @@ class ContatoFactory implements DataBase
             echo $exception->getMessage();
         }
     }
+
 
     public function getAllContacts()
     {
@@ -83,28 +95,32 @@ class ContatoFactory implements DataBase
         return $arrayOfContacts;
     }
 
+
     public function getContactsById($id)
     {
         require_once 'model/Contato.php';
-        $arrayOfContacts = array();
+
+        #mantive array por causa da query
+        $contactToReturn = array();
         $this->connect();
         if ($this->connectorDataBase != null) {
             $contacts;
 
             try {
-                $contacts = $this->connectorDataBase->query('SELECT * FROM contacts WHERE ' . $id . ' = ?');
-                $statement->execute([$id]);
+                $contacts = $this->connectorDataBase->query('SELECT * FROM contacts WHERE id = ?');
+                $contacts->execute([$id]);
                 if (isset($contacts))
                     foreach ($contacts as $row) {
                         $contact = new Contato($row['name_'], $row['email']);
                         $contact->setId($row['id']);
-                        array_push($arrayOfContacts, $contact);
+                        array_push($contactToReturn, $contact);
                     }
             } catch (\PDOException $exception) { }
         }
-        return $arrayOfContacts;
+        return $contactToReturn;
     }
 
+    
     public function deleteContact($id)
     {
         $this->connect();
@@ -116,6 +132,7 @@ class ContatoFactory implements DataBase
         }
     }
 
+
     public function editContact($name_, $email, $id)
     {
         $this->connect();
@@ -126,6 +143,7 @@ class ContatoFactory implements DataBase
             echo 'fail a edição!';
         }
     }
+
 
     public function destroy()
     {
